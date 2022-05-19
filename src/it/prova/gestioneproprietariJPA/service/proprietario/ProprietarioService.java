@@ -20,7 +20,6 @@ public interface ProprietarioService {
 
 	public void rimuovi(Proprietario proprietarioInstance) throws Exception;
 
-	public List<Proprietario> cercaTuttiIMunicipiConMinorenni() throws Exception;
 
 	//per injection
 	public void setProprietarioDAO(ProprietarioDAO proprietarioDAO);

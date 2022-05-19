@@ -42,45 +42,127 @@ public class ProprietarioServiceImpl implements ProprietarioService {
 
 	@Override
 	public Proprietario caricaSingoloProprietario(Long id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+	EntityManager entityManager = EntityManagerUtil.getEntityManager();
+			
+			try {
+				// uso l'injection per il dao
+				proprietarioDAO.setEntityManager(entityManager);
+	
+				// eseguo quello che realmente devo fare
+				return proprietarioDAO.get(id);
+	
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw e;
+			} finally {
+				EntityManagerUtil.closeEntityManager(entityManager);
+			}	
 	}
 
 	@Override
 	public Proprietario caricaSingoloProprietarioConAutomobili(Long id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+			
+			try {
+				// uso l'injection per il dao
+				proprietarioDAO.setEntityManager(entityManager);
+	
+				// eseguo quello che realmente devo fare
+				return proprietarioDAO.getEagerAutomobili(id);
+	
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw e;
+			} finally {
+				EntityManagerUtil.closeEntityManager(entityManager);
+			}
 	}
 
 	@Override
 	public void aggiorna(Proprietario proprietarioInstance) throws Exception {
-		// TODO Auto-generated method stub
+		
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+		
+		try {
+			// uso l'injection per il dao
+			proprietarioDAO.setEntityManager(entityManager);
+
+			// eseguo quello che realmente devo fare
+			proprietarioDAO.update(proprietarioInstance);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
 		
 	}
 
 	@Override
 	public void inserisciNuovo(Proprietario proprietarioInstance) throws Exception {
-		// TODO Auto-generated method stub
+
+	EntityManager entityManager = EntityManagerUtil.getEntityManager();
+			
+			try {
+				// uso l'injection per il dao
+				proprietarioDAO.setEntityManager(entityManager);
+	
+				// eseguo quello che realmente devo fare
+				proprietarioDAO.insert(proprietarioInstance);
+	
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw e;
+			} finally {
+				EntityManagerUtil.closeEntityManager(entityManager);
+			}
 		
 	}
 
 	@Override
 	public void rimuovi(Proprietario proprietarioInstance) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public List<Proprietario> cercaTuttiIMunicipiConMinorenni() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	EntityManager entityManager = EntityManagerUtil.getEntityManager();
+			
+			try {
+				// uso l'injection per il dao
+				proprietarioDAO.setEntityManager(entityManager);
+	
+				// eseguo quello che realmente devo fare
+				proprietarioDAO.delete(proprietarioInstance);
+	
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw e;
+			} finally {
+				EntityManagerUtil.closeEntityManager(entityManager);
+			}
+		
 	}
 
 
 	@Override
 	public List<Proprietario> contaQuantiConImmatricolazioneAPartire(int annoimmatricolazione) {
-		// TODO Auto-generated method stub
-		return null;
+		
+	EntityManager entityManager = EntityManagerUtil.getEntityManager();
+			
+			try {
+				// uso l'injection per il dao
+				proprietarioDAO.setEntityManager(entityManager);
+	
+				// eseguo quello che realmente devo fare
+				return proprietarioDAO.contaQuantiConImmatricolazioneAPartire(annoimmatricolazione);
+	
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw e;
+			} finally {
+				EntityManagerUtil.closeEntityManager(entityManager);
+			}
+		
 	}
 
 }

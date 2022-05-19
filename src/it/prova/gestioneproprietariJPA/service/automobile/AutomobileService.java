@@ -19,15 +19,15 @@ public interface AutomobileService {
 
 	public void inserisciNuovo(Automobile automobileInstance) throws Exception;
 
-	public void rimuovi(Long idAutomobileInstance) throws Exception;
+	public void rimuovi(Automobile automobileInstance) throws Exception;
 
 	
 	//per injection
 	public void setAutomobileDAO(AutomobileDAO automobileDAO);
 	
-	public List<Automobile> proprietariCheHannoCFCheIniziaCon(String cf);
+	public List<Automobile> proprietariCheHannoCFCheIniziaCon(String cf) throws Exception;
 	
-	public List<Automobile> autoConErrori(Date datanascita);
+	public List<Automobile> autoConErrori(Date datanascita) throws Exception;
 	
 	
 }

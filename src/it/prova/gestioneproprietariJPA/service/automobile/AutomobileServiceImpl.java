@@ -3,6 +3,9 @@ package it.prova.gestioneproprietariJPA.service.automobile;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
+import it.prova.gestioneproprietariJPA.dao.EntityManagerUtil;
 import it.prova.gestioneproprietariJPA.dao.automobile.AutomobileDAO;
 import it.prova.gestioneproprietariJPA.model.Automobile;
 
@@ -20,44 +23,146 @@ public class AutomobileServiceImpl implements AutomobileService {
 	@Override
 	public List<Automobile> listAllAutomobili() throws Exception {
 		
-		return null;
+	EntityManager entityManager = EntityManagerUtil.getEntityManager();
+			
+			try {
+				// uso l'injection per il dao
+				automobileDAO.setEntityManager(entityManager);
+	
+				// eseguo quello che realmente devo fare
+				return automobileDAO.list();
+	
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw e;
+			} finally {
+				EntityManagerUtil.closeEntityManager(entityManager);
+			}
 	}
 
 	@Override
 	public Automobile caricaSingoloAutomobile(Long id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	EntityManager entityManager = EntityManagerUtil.getEntityManager();
+			
+			try {
+				// uso l'injection per il dao
+				automobileDAO.setEntityManager(entityManager);
+	
+				// eseguo quello che realmente devo fare
+				return automobileDAO.caricaSingoloAutomobile(id);
+	
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw e;
+			} finally {
+				EntityManagerUtil.closeEntityManager(entityManager);
+			}
 	}
 
 	@Override
 	public void aggiorna(Automobile automobileInstance) throws Exception {
-		// TODO Auto-generated method stub
+		
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+		
+		try {
+			// uso l'injection per il dao
+			automobileDAO.setEntityManager(entityManager);
+
+			// eseguo quello che realmente devo fare
+			automobileDAO.update(automobileInstance);;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
 		
 	}
 
 	@Override
 	public void inserisciNuovo(Automobile automobileInstance) throws Exception {
-		// TODO Auto-generated method stub
+		
+	EntityManager entityManager = EntityManagerUtil.getEntityManager();
+			
+			try {
+				// uso l'injection per il dao
+				automobileDAO.setEntityManager(entityManager);
+	
+				// eseguo quello che realmente devo fare
+				automobileDAO.insert(automobileInstance);;
+	
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw e;
+			} finally {
+				EntityManagerUtil.closeEntityManager(entityManager);
+			}
 		
 	}
 
 	@Override
-	public void rimuovi(Long idAutomobileInstance) throws Exception {
-		// TODO Auto-generated method stub
+	public void rimuovi(Automobile automobileInstance) throws Exception {
+		
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+
+		try {
+			// uso l'injection per il dao
+			automobileDAO.setEntityManager(entityManager);
+
+			// eseguo quello che realmente devo fare
+			automobileDAO.delete(automobileInstance);
+			;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
+	}
+
+
+	@Override
+	public List<Automobile> proprietariCheHannoCFCheIniziaCon(String cf) throws Exception {
+		
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+		
+		try {
+			// uso l'injection per il dao
+			automobileDAO.setEntityManager(entityManager);
+
+			// eseguo quello che realmente devo fare
+			return automobileDAO.proprietariCheHannoCFCheIniziaCon(cf);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
 		
 	}
 
-
 	@Override
-	public List<Automobile> proprietariCheHannoCFCheIniziaCon(String cf) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public List<Automobile> autoConErrori(Date datanascita) throws Exception {
+		
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+		
+		try {
+			// uso l'injection per il dao
+			automobileDAO.setEntityManager(entityManager);
 
-	@Override
-	public List<Automobile> autoConErrori(Date datanascita) {
-		// TODO Auto-generated method stub
-		return null;
+			// eseguo quello che realmente devo fare
+			return automobileDAO.autoConErrori(datanascita);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
+		
 	}
 
 }

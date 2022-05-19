@@ -11,5 +11,7 @@ public interface AutomobileDAO extends IBaseDAO<Automobile> {
 public List<Automobile> proprietariCheHannoCFCheIniziaCon(String cf);
 	
 	public List<Automobile> autoConErrori(Date datanascita);
+	
+	public Automobile caricaSingoloAutomobile(Long id) throws Exception;
 
 }
