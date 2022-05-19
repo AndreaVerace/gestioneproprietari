@@ -8,9 +8,18 @@ import it.prova.gestioneproprietariJPA.model.Automobile;
 
 public class AutomobileServiceImpl implements AutomobileService {
 
+	private AutomobileDAO automobileDAO;
+	
+	
+	@Override
+	public void setAutomobileDAO(AutomobileDAO automobileDAO) {
+		this.automobileDAO=automobileDAO;
+	}
+	
+	
 	@Override
 	public List<Automobile> listAllAutomobili() throws Exception {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -38,11 +47,6 @@ public class AutomobileServiceImpl implements AutomobileService {
 		
 	}
 
-	@Override
-	public void setAutomobileDAO(AutomobileDAO automobileDAO) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public List<Automobile> proprietariCheHannoCFCheIniziaCon(String cf) {

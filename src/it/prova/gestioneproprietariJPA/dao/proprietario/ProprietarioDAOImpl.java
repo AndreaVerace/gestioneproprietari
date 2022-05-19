@@ -8,10 +8,16 @@ import it.prova.gestioneproprietariJPA.model.Proprietario;
 
 public class ProprietarioDAOImpl implements ProprietarioDAO {
 
+	private EntityManager entityManager;
+	
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
+	
+	
 	@Override
 	public List<Proprietario> list() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.createQuery("from Proprietario",Proprietario.class).getResultList();
 	}
 
 	@Override
@@ -34,12 +40,6 @@ public class ProprietarioDAOImpl implements ProprietarioDAO {
 
 	@Override
 	public void delete(Proprietario o) throws Exception {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setEntityManager(EntityManager entityManager) {
 		// TODO Auto-generated method stub
 
 	}
