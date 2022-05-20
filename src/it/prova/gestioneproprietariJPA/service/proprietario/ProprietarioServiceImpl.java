@@ -86,13 +86,18 @@ public class ProprietarioServiceImpl implements ProprietarioService {
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 		
 		try {
+			// questo è come il MyConnection.getConnection()
+			entityManager.getTransaction().begin();
+
 			// uso l'injection per il dao
 			proprietarioDAO.setEntityManager(entityManager);
 
 			// eseguo quello che realmente devo fare
 			proprietarioDAO.update(proprietarioInstance);
 
+			entityManager.getTransaction().commit();
 		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
 			e.printStackTrace();
 			throw e;
 		} finally {
@@ -104,42 +109,53 @@ public class ProprietarioServiceImpl implements ProprietarioService {
 	@Override
 	public void inserisciNuovo(Proprietario proprietarioInstance) throws Exception {
 
-	EntityManager entityManager = EntityManagerUtil.getEntityManager();
-			
-			try {
-				// uso l'injection per il dao
-				proprietarioDAO.setEntityManager(entityManager);
-	
-				// eseguo quello che realmente devo fare
-				proprietarioDAO.insert(proprietarioInstance);
-	
-			} catch (Exception e) {
-				e.printStackTrace();
-				throw e;
-			} finally {
-				EntityManagerUtil.closeEntityManager(entityManager);
-			}
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+
+		try {
+			// questo è come il MyConnection.getConnection()
+			entityManager.getTransaction().begin();
+
+			// uso l'injection per il dao
+			proprietarioDAO.setEntityManager(entityManager);
+
+			// eseguo quello che realmente devo fare
+			proprietarioDAO.insert(proprietarioInstance);
+
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
 		
 	}
 
 	@Override
 	public void rimuovi(Proprietario proprietarioInstance) throws Exception {
 
-	EntityManager entityManager = EntityManagerUtil.getEntityManager();
-			
-			try {
-				// uso l'injection per il dao
-				proprietarioDAO.setEntityManager(entityManager);
-	
-				// eseguo quello che realmente devo fare
-				proprietarioDAO.delete(proprietarioInstance);
-	
-			} catch (Exception e) {
-				e.printStackTrace();
-				throw e;
-			} finally {
-				EntityManagerUtil.closeEntityManager(entityManager);
-			}
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+
+		
+		try {
+			// questo è come il MyConnection.getConnection()
+			entityManager.getTransaction().begin();
+
+			// uso l'injection per il dao
+			proprietarioDAO.setEntityManager(entityManager);
+
+			// eseguo quello che realmente devo fare
+			proprietarioDAO.delete(proprietarioInstance);
+
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
 		
 	}
 

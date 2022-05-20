@@ -57,4 +57,10 @@ public class AutomobileDAOImpl implements AutomobileDAO {
 		return null;
 	}
 
+	@Override
+	public Automobile caricaSingoloAutomobile(Long id) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

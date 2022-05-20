@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import it.prova.gestioneproprietariJPA.model.Proprietario;
+
 public interface IBaseDAO<T> {
 
 	public List<T> list() throws Exception;

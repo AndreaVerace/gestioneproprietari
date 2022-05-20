@@ -65,13 +65,19 @@ public class AutomobileServiceImpl implements AutomobileService {
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 		
 		try {
+			entityManager.getTransaction().begin();
+			
 			// uso l'injection per il dao
 			automobileDAO.setEntityManager(entityManager);
 
 			// eseguo quello che realmente devo fare
 			automobileDAO.update(automobileInstance);;
 
+			entityManager.getTransaction().commit();
+			
 		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			
 			e.printStackTrace();
 			throw e;
 		} finally {
@@ -86,13 +92,18 @@ public class AutomobileServiceImpl implements AutomobileService {
 	EntityManager entityManager = EntityManagerUtil.getEntityManager();
 			
 			try {
+				entityManager.getTransaction().begin();
 				// uso l'injection per il dao
 				automobileDAO.setEntityManager(entityManager);
 	
 				// eseguo quello che realmente devo fare
 				automobileDAO.insert(automobileInstance);;
 	
+				
+				entityManager.getTransaction().commit();
 			} catch (Exception e) {
+				entityManager.getTransaction().rollback();
+				
 				e.printStackTrace();
 				throw e;
 			} finally {
@@ -107,14 +118,16 @@ public class AutomobileServiceImpl implements AutomobileService {
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 
 		try {
+			entityManager.getTransaction().begin();
 			// uso l'injection per il dao
 			automobileDAO.setEntityManager(entityManager);
 
 			// eseguo quello che realmente devo fare
 			automobileDAO.delete(automobileInstance);
-			;
-
+			
+			entityManager.getTransaction().commit();
 		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
 			e.printStackTrace();
 			throw e;
 		} finally {

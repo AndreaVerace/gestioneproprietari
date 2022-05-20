@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 
 import it.prova.gestioneproprietariJPA.model.Proprietario;
 
+
 public class ProprietarioDAOImpl implements ProprietarioDAO {
 
 	private EntityManager entityManager;
@@ -22,19 +23,24 @@ public class ProprietarioDAOImpl implements ProprietarioDAO {
 
 	@Override
 	public Proprietario get(Long id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.find(Proprietario.class, id);
 	}
 
 	@Override
 	public void update(Proprietario o) throws Exception {
-		// TODO Auto-generated method stub
-
+		if(o == null) {
+			throw new Exception("Problema valore in input");
+		}
+		
+		o = entityManager.merge(o);
 	}
 
 	@Override
 	public void insert(Proprietario o) throws Exception {
-		// TODO Auto-generated method stub
+		if(o == null) {
+			throw new Exception("Problema valore in input");
+		}
+		entityManager.persist(o);
 
 	}
 
