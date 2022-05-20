@@ -38,7 +38,11 @@ public class TestProprietarioAutomobile {
 			
 			//testUpdateAutomobile(proprietarioService, automobileService);
 			
-			testRemoveAutomobile(automobileService);
+			//testRemoveAutomobile(automobileService);
+			
+			//testGetEagerProprietario(proprietarioService);
+			
+			testQuantiConImmatricolazioneAPartire(proprietarioService, automobileService);
 			
 		}	catch (Throwable e) {
 			e.printStackTrace();
@@ -164,7 +168,7 @@ public class TestProprietarioAutomobile {
 		System.out.println(result.getMarca());
 	}
 	
-	public static void testUpdateAutomobile(ProprietarioService proprietarioService,AutomobileService automobileService) throws Exception {
+	private static void testUpdateAutomobile(ProprietarioService proprietarioService,AutomobileService automobileService) throws Exception {
 		List<Proprietario> listaProprietariPresenti = proprietarioService.listAllProprietari();
 		if(listaProprietariPresenti.size() < 1)
 			throw new Exception("Test Failed,non sono presenti proprietari.");
@@ -185,13 +189,38 @@ public class TestProprietarioAutomobile {
 		automobileService.aggiorna(daCambiare);
 	}
 	
-	public static void testRemoveAutomobile(AutomobileService automobileService) throws Exception {
+	private static void testRemoveAutomobile(AutomobileService automobileService) throws Exception {
 		
 		Automobile daEliminare = automobileService.listAllAutomobili().get(6);
 		
 		automobileService.rimuovi(daEliminare);
 		
 		System.out.println(automobileService.listAllAutomobili().size());
+	}
+	
+	private static void testGetEagerProprietario(ProprietarioService proprietarioService) throws Exception {
+		List<Proprietario> listaProprietariPresenti = proprietarioService.listAllProprietari();
+		if(listaProprietariPresenti.size() < 1)
+			throw new Exception("Test Failed,non sono presenti proprietari.");
 		
+		long id = proprietarioService.listAllProprietari().get(0).getId();
+		
+		Proprietario ricercato = proprietarioService.caricaSingoloProprietarioConAutomobili(id);
+	}
+	
+	private static void testQuantiConImmatricolazioneAPartire(ProprietarioService proprietarioService,AutomobileService automobileService) throws Exception {
+		List<Proprietario> listaProprietariPresenti = proprietarioService.listAllProprietari();
+		if(listaProprietariPresenti.size() < 1)
+			throw new Exception("Test Failed,non sono presenti proprietari.");
+		
+		List<Automobile> listaAutoiPresenti = automobileService.listAllAutomobili();
+		if(listaAutoiPresenti.size() < 1)
+			throw new Exception("Test Failed,non sono presenti automobili.");
+		
+		int annoImmatricolazioneDiPartenza = 2015;
+		
+		List<Proprietario> result = proprietarioService.contaQuantiConImmatricolazioneAPartire(annoImmatricolazioneDiPartenza);
+		
+		System.out.println(result.size());
 	}
 }

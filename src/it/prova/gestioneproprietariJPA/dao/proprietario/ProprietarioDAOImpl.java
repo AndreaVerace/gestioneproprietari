@@ -60,7 +60,7 @@ public class ProprietarioDAOImpl implements ProprietarioDAO {
 		if(annoimmatricolazione < 1980)
 			throw new Exception ("valore non valido");
 		
-		TypedQuery<Proprietario> query = entityManager.createQuery("from Proprietario p join p.automobili where p.annoimmatricolazione > ?1",Proprietario.class);
+		TypedQuery<Proprietario> query = entityManager.createQuery("select distinct p from Proprietario p join p.automobili a where a.annoImmatricolazione > ?1",Proprietario.class);
 		return query.setParameter(1, annoimmatricolazione).getResultList();
 	}
 
