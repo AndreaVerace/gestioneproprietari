@@ -254,13 +254,16 @@ public class TestProprietarioAutomobile {
 		if(listaAutoiPresenti.size() < 1)
 			throw new Exception("Test Failed,non sono presenti automobili.");
 		
-		Date datanascita = new SimpleDateFormat("dd-MM-yyyy").parse("31-12-2003");
+		Date datanascita = new SimpleDateFormat("dd-MM-yyyy").parse("21-06-2004");
 		
-		List<Automobile> result = automobileService.autoConErrori(datanascita);
+		if(datanascita.after(new SimpleDateFormat("dd-MM-yyyy").parse("21-05-2004"))) {
+			List<Automobile> result = automobileService.autoConErrori(datanascita);
 		
-		System.out.println(result.size());
-	}
+			System.out.println(result.size());
 	
+		}
+		else throw new Exception("La data di nascita iniziale corrisponde ad una maggiore età.");
+	}
 	
 	
 }
