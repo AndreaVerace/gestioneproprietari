@@ -20,7 +20,7 @@ public class TestProprietarioAutomobile {
 		
 		try {
 			
-			testListProprietario(proprietarioService);
+			//testListProprietario(proprietarioService);
 			
 			//testGetProprietario(proprietarioService);
 			

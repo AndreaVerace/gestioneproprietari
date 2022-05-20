@@ -62,6 +62,8 @@ public class ProprietarioDAOImpl implements ProprietarioDAO {
 		
 		TypedQuery<Proprietario> query = entityManager.createQuery("select distinct p from Proprietario p join p.automobili a where a.annoImmatricolazione > ?1",Proprietario.class);
 		return query.setParameter(1, annoimmatricolazione).getResultList();
+		
+		// se devo ritornare un int aggiungo il .size() a .getResultList()
 	}
 
 
