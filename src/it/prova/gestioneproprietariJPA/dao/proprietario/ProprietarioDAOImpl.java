@@ -64,6 +64,8 @@ public class ProprietarioDAOImpl implements ProprietarioDAO {
 		return query.setParameter(1, annoimmatricolazione).getResultList();
 		
 		// se devo ritornare un int aggiungo il .size() a .getResultList()
+		
+		// OPPURE int count = ((Number) query.getSingleResult()).intValue();
 	}
 
 
@@ -76,6 +78,7 @@ public class ProprietarioDAOImpl implements ProprietarioDAO {
 		return query.getResultStream().findFirst().orElse(null);
 	}
 
+	
 
 	
 

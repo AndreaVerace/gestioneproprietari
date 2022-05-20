@@ -20,7 +20,7 @@ public interface ProprietarioService {
 
 	public void rimuovi(Proprietario proprietarioInstance) throws Exception;
 
-
+	
 	//per injection
 	public void setProprietarioDAO(ProprietarioDAO proprietarioDAO);
 	

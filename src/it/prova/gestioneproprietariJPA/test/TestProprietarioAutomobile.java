@@ -46,7 +46,7 @@ public class TestProprietarioAutomobile {
 			
 			//testProprietariCheHannoCFCheIniziaCon(proprietarioService, automobileService);
 			
-			testAutoConErrori(proprietarioService, automobileService);
+			//testAutoConErrori(proprietarioService, automobileService);
 			
 		}	catch (Throwable e) {
 			e.printStackTrace();
@@ -118,11 +118,12 @@ public class TestProprietarioAutomobile {
 	
 	private static void testDeleteProprietario(ProprietarioService proprietarioService) throws Exception {
 		
-		Proprietario daEliminare = proprietarioService.listAllProprietari().get(0);
+		Proprietario daEliminare = proprietarioService.listAllProprietari().get(4);
 		
-		proprietarioService.rimuovi(daEliminare);
+			proprietarioService.rimuovi(daEliminare);
+			
+			System.out.println(proprietarioService.listAllProprietari().size());
 		
-		System.out.println(proprietarioService.listAllProprietari().size());
 	}
 	
 	private static void testInsertAutomobile(ProprietarioService proprietarioService,AutomobileService automobileService) throws Exception {
