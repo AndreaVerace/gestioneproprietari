@@ -42,7 +42,11 @@ public class TestProprietarioAutomobile {
 			
 			//testGetEagerProprietario(proprietarioService);
 			
-			testQuantiConImmatricolazioneAPartire(proprietarioService, automobileService);
+			//testQuantiConImmatricolazioneAPartire(proprietarioService, automobileService);
+			
+			//testProprietariCheHannoCFCheIniziaCon(proprietarioService, automobileService);
+			
+			testAutoConErrori(proprietarioService, automobileService);
 			
 		}	catch (Throwable e) {
 			e.printStackTrace();
@@ -223,4 +227,39 @@ public class TestProprietarioAutomobile {
 		
 		System.out.println(result.size());
 	}
+	
+	private static void testProprietariCheHannoCFCheIniziaCon(ProprietarioService proprietarioService,AutomobileService automobileService) throws Exception {
+		List<Proprietario> listaProprietariPresenti = proprietarioService.listAllProprietari();
+		if(listaProprietariPresenti.size() < 1)
+			throw new Exception("Test Failed,non sono presenti proprietari.");
+		
+		List<Automobile> listaAutoiPresenti = automobileService.listAllAutomobili();
+		if(listaAutoiPresenti.size() < 1)
+			throw new Exception("Test Failed,non sono presenti automobili.");
+		
+		String inizialeCF = "VRC";
+		
+		List<Automobile> result = automobileService.proprietariCheHannoCFCheIniziaCon(inizialeCF);
+		
+		System.out.println(result.size());
+	}
+	
+	private static void testAutoConErrori(ProprietarioService proprietarioService,AutomobileService automobileService) throws Exception {
+		List<Proprietario> listaProprietariPresenti = proprietarioService.listAllProprietari();
+		if(listaProprietariPresenti.size() < 1)
+			throw new Exception("Test Failed,non sono presenti proprietari.");
+		
+		List<Automobile> listaAutoiPresenti = automobileService.listAllAutomobili();
+		if(listaAutoiPresenti.size() < 1)
+			throw new Exception("Test Failed,non sono presenti automobili.");
+		
+		Date datanascita = new SimpleDateFormat("dd-MM-yyyy").parse("31-12-2003");
+		
+		List<Automobile> result = automobileService.autoConErrori(datanascita);
+		
+		System.out.println(result.size());
+	}
+	
+	
+	
 }

@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import it.prova.gestioneproprietariJPA.model.Automobile;
 import it.prova.gestioneproprietariJPA.model.Proprietario;
@@ -55,15 +57,15 @@ public class AutomobileDAOImpl implements AutomobileDAO {
 
 
 	@Override
-	public List<Automobile> proprietariCheHannoCFCheIniziaCon(String cf) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Automobile> proprietariCheHannoCFCheIniziaCon(String cf) throws Exception {
+		TypedQuery<Automobile> query = entityManager.createQuery("select distinct a from Automobile a join a.proprietario p where p.codiceFiscale like ?1",Automobile.class);
+		return query.setParameter(1, cf + "%").getResultList();
 	}
 
 	@Override
-	public List<Automobile> autoConErrori(Date datanascita) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Automobile> autoConErrori(Date datanascita) throws Exception {
+		TypedQuery<Automobile> query =  entityManager.createQuery("select a from Automobile a join a.proprietario p where p.dataNascita > ?1",Automobile.class);
+		return query.setParameter(1, datanascita).getResultList();
 	}
 
 	

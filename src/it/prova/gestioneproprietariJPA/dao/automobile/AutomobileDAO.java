@@ -8,9 +8,10 @@ import it.prova.gestioneproprietariJPA.model.Automobile;
 
 public interface AutomobileDAO extends IBaseDAO<Automobile> {
 	
-public List<Automobile> proprietariCheHannoCFCheIniziaCon(String cf);
+public List<Automobile> proprietariCheHannoCFCheIniziaCon(String cf) throws Exception;
 	
-	public List<Automobile> autoConErrori(Date datanascita);
+	public List<Automobile> autoConErrori(Date datanascita) throws Exception;
+
 	
 	
 
