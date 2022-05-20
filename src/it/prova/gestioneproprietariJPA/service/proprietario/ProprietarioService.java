@@ -24,6 +24,6 @@ public interface ProprietarioService {
 	//per injection
 	public void setProprietarioDAO(ProprietarioDAO proprietarioDAO);
 	
-	public List<Proprietario> contaQuantiConImmatricolazioneAPartire(int annoimmatricolazione);
+	public List<Proprietario> contaQuantiConImmatricolazioneAPartire(int annoimmatricolazione) throws Exception;
 	
 }

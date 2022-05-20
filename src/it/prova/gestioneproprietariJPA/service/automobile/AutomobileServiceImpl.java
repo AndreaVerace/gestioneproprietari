@@ -49,7 +49,7 @@ public class AutomobileServiceImpl implements AutomobileService {
 				automobileDAO.setEntityManager(entityManager);
 	
 				// eseguo quello che realmente devo fare
-				return automobileDAO.caricaSingoloAutomobile(id);
+				return automobileDAO.get(id);
 	
 			} catch (Exception e) {
 				e.printStackTrace();

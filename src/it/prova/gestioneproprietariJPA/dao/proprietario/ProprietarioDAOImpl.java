@@ -3,8 +3,10 @@ package it.prova.gestioneproprietariJPA.dao.proprietario;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import it.prova.gestioneproprietariJPA.model.Proprietario;
+
 
 
 public class ProprietarioDAOImpl implements ProprietarioDAO {
@@ -54,16 +56,25 @@ public class ProprietarioDAOImpl implements ProprietarioDAO {
 	}
 
 	@Override
-	public List<Proprietario> contaQuantiConImmatricolazioneAPartire(int annoimmatricolazione) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Proprietario> contaQuantiConImmatricolazioneAPartire(int annoimmatricolazione) throws Exception {
+		if(annoimmatricolazione < 1980)
+			throw new Exception ("valore non valido");
+		
+		TypedQuery<Proprietario> query = entityManager.createQuery("from Proprietario p join p.automobili where p.annoimmatricolazione > ?1",Proprietario.class);
+		return query.setParameter(1, annoimmatricolazione).getResultList();
 	}
 
 
 	@Override
 	public Proprietario getEagerAutomobili(long id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		TypedQuery<Proprietario> query = entityManager
+				.createQuery("from Proprietario p left join fetch p.automobili where p.id = ?1", Proprietario.class);
+		query.setParameter(1, id);
+		
+		return query.getResultStream().findFirst().orElse(null);
 	}
+
+
+	
 
 }

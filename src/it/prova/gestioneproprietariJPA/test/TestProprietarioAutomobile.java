@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import it.prova.gestioneproprietariJPA.dao.EntityManagerUtil;
+import it.prova.gestioneproprietariJPA.model.Automobile;
 import it.prova.gestioneproprietariJPA.model.Proprietario;
 import it.prova.gestioneproprietariJPA.service.MyServiceFactory;
 import it.prova.gestioneproprietariJPA.service.automobile.AutomobileService;
@@ -27,7 +28,17 @@ public class TestProprietarioAutomobile {
 			
 			//testUpdateProprietario(proprietarioService);
 			
-			testDeleteProprietario(proprietarioService);
+			//testDeleteProprietario(proprietarioService);
+			
+			//testInsertAutomobile(proprietarioService, automobileService);
+			
+			//testListAutomobili(proprietarioService, automobileService);
+			
+			//testGetAutomobile(proprietarioService, automobileService);
+			
+			//testUpdateAutomobile(proprietarioService, automobileService);
+			
+			testRemoveAutomobile(automobileService);
 			
 		}	catch (Throwable e) {
 			e.printStackTrace();
@@ -60,9 +71,9 @@ public class TestProprietarioAutomobile {
 	
 	private static void testInsertProprietario(ProprietarioService proprietarioService) throws Exception {
 		
-		Date datanascita = new SimpleDateFormat("dd-MM-yyyy").parse("23-11-1998");
+		Date datanascita = new SimpleDateFormat("dd-MM-yyyy").parse("23-11-1967");
 		
-		Proprietario nuovoProprietario = new Proprietario("Giovanni","Verace","VRCNDR98",datanascita);
+		Proprietario nuovoProprietario = new Proprietario("Aldo","Baglio","LDBGLO67",datanascita);
 		
 		if(nuovoProprietario == null)
 			throw new Exception("impossibile aggiungere proprietario senza valori");
@@ -104,6 +115,83 @@ public class TestProprietarioAutomobile {
 		proprietarioService.rimuovi(daEliminare);
 		
 		System.out.println(proprietarioService.listAllProprietari().size());
+	}
+	
+	private static void testInsertAutomobile(ProprietarioService proprietarioService,AutomobileService automobileService) throws Exception {
+		List<Proprietario> listaProprietariPresenti = proprietarioService.listAllProprietari();
+		if(listaProprietariPresenti.size() < 1)
+			throw new Exception("Test Failed,non sono presenti proprietari.");
+		
+		Proprietario dellAutoDaInserire = proprietarioService.listAllProprietari().get(2);
+		
+		Automobile daInserire = new Automobile("Fiat","Modello15","BF936BF",2018);
+		
+		daInserire.setProprietario(dellAutoDaInserire);
+		
+		automobileService.inserisciNuovo(daInserire);
+		
+		if(daInserire.getId() == null)
+			throw new Exception("Test failed.");
+		
+		System.out.println(daInserire.getId());
+	}
+	
+	private static void testListAutomobili(ProprietarioService proprietarioService,AutomobileService automobileService) throws Exception {
+		List<Proprietario> listaProprietariPresenti = proprietarioService.listAllProprietari();
+		if(listaProprietariPresenti.size() < 1)
+			throw new Exception("Test Failed,non sono presenti proprietari.");
+		
+		List<Automobile> listaAutoiPresenti = automobileService.listAllAutomobili();
+		if(listaAutoiPresenti.size() < 1)
+			throw new Exception("Test Failed,non sono presenti automobili.");
+		
+		System.out.println("Elementi presenti nella tabella Automobili: " + automobileService.listAllAutomobili().size());
+	}
+	
+	private static void testGetAutomobile(ProprietarioService proprietarioService,AutomobileService automobileService) throws Exception {
+		List<Proprietario> listaProprietariPresenti = proprietarioService.listAllProprietari();
+		if(listaProprietariPresenti.size() < 1)
+			throw new Exception("Test Failed,non sono presenti proprietari.");
+		
+		List<Automobile> listaAutoiPresenti = automobileService.listAllAutomobili();
+		if(listaAutoiPresenti.size() < 1)
+			throw new Exception("Test Failed,non sono presenti automobili.");
+		
+		long id = automobileService.listAllAutomobili().get(0).getId();
+		
+		Automobile result = automobileService.caricaSingoloAutomobile(id);
+		
+		System.out.println(result.getMarca());
+	}
+	
+	public static void testUpdateAutomobile(ProprietarioService proprietarioService,AutomobileService automobileService) throws Exception {
+		List<Proprietario> listaProprietariPresenti = proprietarioService.listAllProprietari();
+		if(listaProprietariPresenti.size() < 1)
+			throw new Exception("Test Failed,non sono presenti proprietari.");
+		
+		List<Automobile> listaAutoiPresenti = automobileService.listAllAutomobili();
+		if(listaAutoiPresenti.size() < 1)
+			throw new Exception("Test Failed,non sono presenti automobili.");
+		
+		
+		Automobile daCambiare =  automobileService.listAllAutomobili().get(6);
+		
+		daCambiare.setMarca("Fiat");
+		daCambiare.setModello("Modello78");
+		daCambiare.setTarga("NA094GT");
+		daCambiare.setAnnoImmatricolazione(2000);
+		daCambiare.setProprietario(proprietarioService.listAllProprietari().get(2));
+		
+		automobileService.aggiorna(daCambiare);
+	}
+	
+	public static void testRemoveAutomobile(AutomobileService automobileService) throws Exception {
+		
+		Automobile daEliminare = automobileService.listAllAutomobili().get(6);
+		
+		automobileService.rimuovi(daEliminare);
+		
+		System.out.println(automobileService.listAllAutomobili().size());
 		
 	}
 }

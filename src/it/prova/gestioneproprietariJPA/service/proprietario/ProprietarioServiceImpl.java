@@ -161,7 +161,7 @@ public class ProprietarioServiceImpl implements ProprietarioService {
 
 
 	@Override
-	public List<Proprietario> contaQuantiConImmatricolazioneAPartire(int annoimmatricolazione) {
+	public List<Proprietario> contaQuantiConImmatricolazioneAPartire(int annoimmatricolazione) throws Exception {
 		
 	EntityManager entityManager = EntityManagerUtil.getEntityManager();
 			
