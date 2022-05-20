@@ -46,8 +46,11 @@ public class ProprietarioDAOImpl implements ProprietarioDAO {
 
 	@Override
 	public void delete(Proprietario o) throws Exception {
-		// TODO Auto-generated method stub
 
+		if(o == null) {
+			throw new Exception("Problema valore in input");
+		}
+		entityManager.remove(entityManager.merge(o));
 	}
 
 	@Override

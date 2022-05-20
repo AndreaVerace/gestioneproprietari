@@ -23,9 +23,11 @@ public class TestProprietarioAutomobile {
 			
 			//testGetProprietario(proprietarioService);
 			
-			testInsertProprietario(proprietarioService);
+			//testInsertProprietario(proprietarioService);
 			
 			//testUpdateProprietario(proprietarioService);
+			
+			testDeleteProprietario(proprietarioService);
 			
 		}	catch (Throwable e) {
 			e.printStackTrace();
@@ -53,7 +55,7 @@ public class TestProprietarioAutomobile {
 		
 		Proprietario ricercato = proprietarioService.caricaSingoloProprietario(id);
 		
-		System.out.println(ricercato);
+		System.out.println(ricercato.getId());
 	}
 	
 	private static void testInsertProprietario(ProprietarioService proprietarioService) throws Exception {
@@ -91,7 +93,17 @@ public class TestProprietarioAutomobile {
 		
 		proprietarioService.aggiorna(daCambiare);
 		
-		System.out.println(proprietarioService.listAllProprietari().get(0));
+		System.out.println(proprietarioService.listAllProprietari().get(0).getCodiceFiscale());
+	}
+	
+	
+	private static void testDeleteProprietario(ProprietarioService proprietarioService) throws Exception {
+		
+		Proprietario daEliminare = proprietarioService.listAllProprietari().get(0);
+		
+		proprietarioService.rimuovi(daEliminare);
+		
+		System.out.println(proprietarioService.listAllProprietari().size());
 		
 	}
 }
